@@ -1,0 +1,20 @@
+body {
+	background-color: #fff
+}
+
+/*Side bar*/
+
+.service-links:hover {
+	padding: 3px 0;
+	margin-left:5px;
+	font-weight:700;
+	color:#747373;
+}
+
+.service-links {
+	color:#747373;
+}
+
+.services-list .card-header h2 {
+	font-size: 2.25rem;
+}

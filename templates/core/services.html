@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Services{% endblock %}
+
+{% block content %}
+	<div class="container-fluid">
+		<div class="row">
+			<!-- Side bar -->
+			<div class="col-md-4 mt-2">
+				<div class="card border-primary mb-3 services-list" style="max-width: 20rem;">
+				  <div class="card-header"><h2 class="display-4">Услуги</h2></div>
+				  <div class="card-body text-primary">
+
+				  	{% for c in categories %}
+				    <a href="{{ c.get_absolute_url }}"><h5 class="card-title">{{ c.title }}</h5></a>
+				    {% for serv in c.service_set.all %}
+					    <p class="card-text"><i class="fas fa-angle-right ml-2"></i>  <a href="" class="service-links">{{ serv.title }}</a></p>
+				    {% endfor %}
+				   {% endfor %}
+
+				  </div>
+				</div>
+			</div>				
+
+			<!-- Content -->
+			<div class="col-md-8 mt-2 pr-5">
+			
+			</div>
+		</div>
+	</div>
+{% endblock %}

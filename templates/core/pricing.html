@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Services{% endblock %}
+
+{% block content %}
+	<div class="container-fluid">
+		<div class="row">
+			<!-- Side bar -->
+			<div class="col-md-4 mt-2">
+				<div class="card border-primary mb-3 services-list" style="max-width: 20rem;">
+				  <div class="card-header"><h2 class="display-4">Услуги</h2></div>
+				  <div class="card-body text-primary">
+
+				  	{% for c in categories %}
+				    <a href="{{ c.get_absolute_url }}"><h5 class="card-title">{{ c.title }}</h5></a>
+				    {% for serv in c.service_set.all %}
+					    <p class="card-text"><i class="fas fa-angle-right ml-2"></i>  <a href="" class="service-links">{{ serv.title }}</a></p>
+				    {% endfor %}
+				   {% endfor %}
+
+				  </div>
+				</div>
+			</div>				
+
+			<!-- Content -->
+			<div class="col-md-8 mt-2 pr-5">
+				<div class="d-flex justify-content-center">
+					<h1>Прайс-лист</h1>
+				</div>
+				<hr class="my-4 hr-dark" style="border-color: #4285f4">
+
+				{% for c in categories %}
+				<h3>{{ c.title }}</h3>
+				<table class="table table-striped table-responsive-md btn-table mb-5">
+
+					<thead>
+					  <tr>
+					    <th>#</th>
+					    <th>Услуга</th>
+					    <th>Цена</th>
+					    <th>Запись</th>
+					  </tr>
+					</thead>
+
+					<tbody>
+						{% for serv in c.service_set.all %}
+					  <tr>
+					    <th scope="row">{{ forloop.counter }}</th>
+					    <td>{{ serv.title }}</td>
+					    <td>{{ serv.price }}</td>
+					    <td>
+					      <button type="button" class="btn btn-indigo btn-sm m-0">Button</button>
+					    </td>
+					  </tr>
+					  {% endfor %}
+					</tbody>
+
+				</table>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% endblock %}
