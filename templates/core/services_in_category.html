@@ -116,8 +116,8 @@
 
             <!-- Card header -->
             <div class="card-header border-bottom border-light" role="tab" id="headingOne2">
-              <a data-toggle="collapse" data-parent="#accordionEy" href="#collapseOn{{ forloop.counter }}" aria-expanded="true"
-                aria-controls="collapseOn{{ forloop.counter }}">
+              <a data-toggle="collapse" data-parent="#accordionEy" href="#collapseOn0" aria-expanded="true"
+                aria-controls="collapseOn0">
                 <h5 class="black-text text-left font-weight-normal mb-0 ml-2">
                   {{ date1|date:"d E Y года" }} <i class="far fa-calendar-alt"></i> <i class="fas fa-angle-down rotate-icon"></i>
                 </h5>
@@ -125,23 +125,27 @@
             </div>
 
             <!-- Card body -->
-            <div id="collapseOn{{ forloop.counter }}" class="collapse show" role="tabpanel" aria-labelledby="headingOne2"
+            <div id="collapseOn0" class="collapse show pb-5" role="tabpanel" aria-labelledby="headingOne2"
               data-parent="#accordionEy">
               <div class="card-body">
                 <div class="mb-3 text-left">
 
                 	{% for date in day1 %}
                 		{% if date in ordered_dates %}
-							<div class="btn-group" role="group">
-						    	<button data-year={{ date.year }} data-month={{ date.month }} data-day={{ date.day }} data-hour={{ date.hour }} data-service={{ service.id }} 
-						    	type="button" disabled="disabled" class="btn btn-outline-danger btn-rounded waves-effect add-record">{{ date.time|date:"H" }}:00</button>
-						   </div>
-						   {% else %}
-						   <div class="btn-group" role="group">
-						    	<a href="{{ service.get_absolute_url }}" data-year={{ date.year }} data-month={{ date.month }} data-day={{ date.day }} data-hour={{ date.hour }} data-service={{ service.id }} 
-						    	type="button" class="btn btn-outline-primary btn-rounded waves-effect add-record">{{ date.time|date:"H" }}:00</a>
-						   </div>
-						   {% endif %}
+      							<div class="btn-group" role="group">
+      						    	<button type="button" disabled="disabled" class="btn btn-outline-danger btn-rounded dropdown-toggle waves-effect">{{ date.time|date:"H" }}:00</button>
+      						  </div>
+    						   {% else %}
+                    <div class="btn-group" role="group">
+                      <button class="btn btn-outline-primary btn-rounded waves-effect dropdown-toggle" type="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">{{ date.time|date:"H" }}:00</button>
+                      <div class="dropdown-menu">
+                        <h6 class="dropdown-header">Запись {{ date|date:"d E на H:00"}}</h6>
+                        <a class="dropdown-item add-record" href="{{ service.get_absolute_url }}" 
+                        data-year={{ date.year }} data-month={{ date.month }} data-day={{ date.day }} data-hour={{ date.hour }} data-service={{ service.id }}>Записаться</a>
+                      </div>
+                    </div>
+    						   {% endif %}
                 	{% endfor %}
 
 				    </div>
@@ -165,8 +169,8 @@
 
             <!-- Card header -->
             <div class="card-header border-bottom border-light" role="tab" id="headingOne2">
-              <a data-toggle="collapse" data-parent="#accordionEy" href="#collapseOn{{ forloop.counter }}" aria-expanded="true"
-                aria-controls="collapseOn{{ forloop.counter }}">
+              <a data-toggle="collapse" data-parent="#accordionEy" href="#collapseOn1" aria-expanded="true"
+                aria-controls="collapseOn1">
                 <h5 class="black-text text-left font-weight-normal mb-0 ml-2">
                   {{ date2|date:"d E Y года" }} <i class="far fa-calendar-alt"></i> <i class="fas fa-angle-down rotate-icon"></i>
                 </h5>
@@ -174,23 +178,27 @@
             </div>
 
             <!-- Card body -->
-            <div id="collapseOn{{ forloop.counter }}" class="collapse show" role="tabpanel" aria-labelledby="headingOne2"
+            <div id="collapseOn1" class="collapse show pb-5" role="tabpanel" aria-labelledby="headingOne2"
               data-parent="#accordionEy">
               <div class="card-body">
                 <div class="mb-3 text-left">
 
                 	{% for date in day2 %}
 	                	{% if date in ordered_dates %}
-							<div class="btn-group" role="group">
-						    	<button data-year={{ date.year }} data-month={{ date.month }} data-day={{ date.day }} data-hour={{ date.hour }} data-service={{ service.id }} 
-						    	type="button" disabled="disabled" class="btn btn-outline-danger btn-rounded waves-effect add-record">{{ date.time|date:"H" }}:00</button>
-						   </div>
-						   {% else %}
-						   <div class="btn-group" role="group">
-						    	<a href="{{ service.get_absolute_url }}" data-year={{ date.year }} data-month={{ date.month }} data-day={{ date.day }} data-hour={{ date.hour }} data-service={{ service.id }} 
-						    	type="button" class="btn btn-outline-primary btn-rounded waves-effect add-record">{{ date.time|date:"H" }}:00</a>
-						   </div>
-						   {% endif %}
+      							 <div class="btn-group" role="group">
+                        <button type="button" disabled="disabled" class="btn btn-outline-danger btn-rounded dropdown-toggle waves-effect">{{ date.time|date:"H" }}:00</button>
+                    </div>
+                   {% else %}
+                    <div class="btn-group" role="group">
+                      <button class="btn btn-outline-primary btn-rounded waves-effect dropdown-toggle" type="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">{{ date.time|date:"H" }}:00</button>
+                      <div class="dropdown-menu">
+                        <h6 class="dropdown-header">Запись {{ date|date:"d E на H:00"}}</h6>
+                        <a class="dropdown-item add-record" href="{{ service.get_absolute_url }}" 
+                        data-year={{ date.year }} data-month={{ date.month }} data-day={{ date.day }} data-hour={{ date.hour }} data-service={{ service.id }}>Записаться</a>
+                      </div>
+                    </div>
+    						   {% endif %}
                 	{% endfor %}
 
 				    </div>
@@ -214,8 +222,8 @@
 
             <!-- Card header -->
             <div class="card-header border-bottom border-light" role="tab" id="headingOne2">
-              <a data-toggle="collapse" data-parent="#accordionEy" href="#collapseOn{{ forloop.counter }}" aria-expanded="true"
-                aria-controls="collapseOn{{ forloop.counter }}">
+              <a data-toggle="collapse" data-parent="#accordionEy" href="#collapseOn2" aria-expanded="true"
+                aria-controls="collapseOn2">
                 <h5 class="black-text text-left font-weight-normal mb-0 ml-2">
                   {{ date3|date:"d E Y года" }} <i class="far fa-calendar-alt"></i> <i class="fas fa-angle-down rotate-icon"></i>
                 </h5>
@@ -223,23 +231,27 @@
             </div>
 
             <!-- Card body -->
-            <div id="collapseOn{{ forloop.counter }}" class="collapse show" role="tabpanel" aria-labelledby="headingOne2"
+            <div id="collapseOn2" class="collapse show pb-5" role="tabpanel" aria-labelledby="headingOne2"
               data-parent="#accordionEy">
               <div class="card-body">
                 <div class="mb-3 text-left">
 
                 	{% for date in day3 %}
 	                	{% if date in ordered_dates %}
-							<div class="btn-group" role="group">
-						    	<button data-year={{ date.year }} data-month={{ date.month }} data-day={{ date.day }} data-hour={{ date.hour }} data-service={{ service.id }} 
-						    	type="button" disabled="disabled" class="btn btn-outline-danger btn-rounded waves-effect add-record">{{ date.time|date:"H" }}:00</button>
-						   </div>
-						   {% else %}
-						   <div class="btn-group" role="group">
-						    	<a href="{{ service.get_absolute_url }}" data-year={{ date.year }} data-month={{ date.month }} data-day={{ date.day }} data-hour={{ date.hour }} data-service={{ service.id }} 
-						    	type="button" class="btn btn-outline-primary btn-rounded waves-effect add-record">{{ date.time|date:"H" }}:00</a>
-						   </div>
-						   {% endif %}
+      							 <div class="btn-group" role="group">
+                        <button type="button" disabled="disabled" class="btn btn-outline-danger btn-rounded dropdown-toggle waves-effect">{{ date.time|date:"H" }}:00</button>
+                    </div>
+                   {% else %}
+                    <div class="btn-group" role="group">
+                      <button class="btn btn-outline-primary btn-rounded waves-effect dropdown-toggle" type="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">{{ date.time|date:"H" }}:00</button>
+                      <div class="dropdown-menu">
+                        <h6 class="dropdown-header">Запись {{ date|date:"d E на H:00"}}</h6>
+                        <a class="dropdown-item add-record" href="{{ service.get_absolute_url }}" 
+                        data-year={{ date.year }} data-month={{ date.month }} data-day={{ date.day }} data-hour={{ date.hour }} data-service={{ service.id }}>Записаться</a>
+                      </div>
+                    </div>
+    						   {% endif %}
                 	{% endfor %}
 
 				    </div>
@@ -263,8 +275,8 @@
 
             <!-- Card header -->
             <div class="card-header border-bottom border-light" role="tab" id="headingOne2">
-              <a data-toggle="collapse" data-parent="#accordionEy" href="#collapseOn{{ forloop.counter }}" aria-expanded="true"
-                aria-controls="collapseOn{{ forloop.counter }}">
+              <a data-toggle="collapse" data-parent="#accordionEy" href="#collapseOn3" aria-expanded="true"
+                aria-controls="collapseOn3">
                 <h5 class="black-text text-left font-weight-normal mb-0 ml-2">
                   {{ date4|date:"d E Y года" }} <i class="far fa-calendar-alt"></i> <i class="fas fa-angle-down rotate-icon"></i>
                 </h5>
@@ -272,23 +284,27 @@
             </div>
 
             <!-- Card body -->
-            <div id="collapseOn{{ forloop.counter }}" class="collapse show" role="tabpanel" aria-labelledby="headingOne2"
+            <div id="collapseOn3" class="collapse show pb-5" role="tabpanel" aria-labelledby="headingOne2"
               data-parent="#accordionEy">
               <div class="card-body">
                 <div class="mb-3 text-left">
 
                 	{% for date in day4 %}
 	                	{% if date in ordered_dates %}
-							<div class="btn-group" role="group">
-						    	<button data-year={{ date.year }} data-month={{ date.month }} data-day={{ date.day }} data-hour={{ date.hour }} data-service={{ service.id }} 
-						    	type="button" disabled="disabled" class="btn btn-outline-danger btn-rounded waves-effect add-record">{{ date.time|date:"H" }}:00</button>
-						   </div>
-						   {% else %}
-						   <div class="btn-group" role="group">
-						    	<a href="{{ service.get_absolute_url }}" data-year={{ date.year }} data-month={{ date.month }} data-day={{ date.day }} data-hour={{ date.hour }} data-service={{ service.id }} 
-						    	type="button" class="btn btn-outline-primary btn-rounded waves-effect add-record">{{ date.time|date:"H" }}:00</a>
-						   </div>
-						   {% endif %}
+      							 <div class="btn-group" role="group">
+                        <button type="button" disabled="disabled" class="btn btn-outline-danger btn-rounded dropdown-toggle waves-effect">{{ date.time|date:"H" }}:00</button>
+                    </div>
+                   {% else %}
+                    <div class="btn-group" role="group">
+                      <button class="btn btn-outline-primary btn-rounded waves-effect dropdown-toggle" type="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">{{ date.time|date:"H" }}:00</button>
+                      <div class="dropdown-menu">
+                        <h6 class="dropdown-header">Запись {{ date|date:"d E на H:00"}}</h6>
+                        <a class="dropdown-item add-record" href="{{ service.get_absolute_url }}" 
+                        data-year={{ date.year }} data-month={{ date.month }} data-day={{ date.day }} data-hour={{ date.hour }} data-service={{ service.id }}>Записаться</a>
+                      </div>
+                    </div>
+    						    {% endif %}
                 	{% endfor %}
 
 				    </div>
@@ -312,8 +328,8 @@
 
             <!-- Card header -->
             <div class="card-header border-bottom border-light" role="tab" id="headingOne2">
-              <a data-toggle="collapse" data-parent="#accordionEy" href="#collapseOn{{ forloop.counter }}" aria-expanded="true"
-                aria-controls="collapseOn{{ forloop.counter }}">
+              <a data-toggle="collapse" data-parent="#accordionEy" href="#collapseOn4" aria-expanded="true"
+                aria-controls="collapseOn4">
                 <h5 class="black-text text-left font-weight-normal mb-0 ml-2">
                   {{ date5|date:"d E Y года" }} <i class="far fa-calendar-alt"></i> <i class="fas fa-angle-down rotate-icon"></i>
                 </h5>
@@ -321,23 +337,27 @@
             </div>
 
             <!-- Card body -->
-            <div id="collapseOn{{ forloop.counter }}" class="collapse show" role="tabpanel" aria-labelledby="headingOne2"
+            <div id="collapseOn4" class="collapse show pb-5" role="tabpanel" aria-labelledby="headingOne2"
               data-parent="#accordionEy">
               <div class="card-body">
                 <div class="mb-3 text-left">
 
                 	{% for date in day5 %}
 	                	{% if date in ordered_dates %}
-							<div class="btn-group" role="group">
-						    	<button data-year={{ date.year }} data-month={{ date.month }} data-day={{ date.day }} data-hour={{ date.hour }} data-service={{ service.id }} 
-						    	type="button" disabled="disabled" class="btn btn-outline-danger btn-rounded waves-effect add-record">{{ date.time|date:"H" }}:00</button>
-						   </div>
-						   {% else %}
-						   <div class="btn-group" role="group">
-						    	<a href="{{ service.get_absolute_url }}" data-year={{ date.year }} data-month={{ date.month }} data-day={{ date.day }} data-hour={{ date.hour }} data-service={{ service.id }} 
-						    	type="button" class="btn btn-outline-primary btn-rounded waves-effect add-record">{{ date.time|date:"H" }}:00</a>
-						   </div>
-						   {% endif %}
+      							 <div class="btn-group" role="group">
+                        <button type="button" disabled="disabled" class="btn btn-outline-danger btn-rounded dropdown-toggle waves-effect">{{ date.time|date:"H" }}:00</button>
+                    </div>
+                   {% else %}
+                    <div class="btn-group" role="group">
+                      <button class="btn btn-outline-primary btn-rounded waves-effect dropdown-toggle" type="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">{{ date.time|date:"H" }}:00</button>
+                      <div class="dropdown-menu">
+                        <h6 class="dropdown-header">Запись {{ date|date:"d E на H:00"}}</h6>
+                        <a class="dropdown-item add-record" href="{{ service.get_absolute_url }}" 
+                        data-year={{ date.year }} data-month={{ date.month }} data-day={{ date.day }} data-hour={{ date.hour }} data-service={{ service.id }}>Записаться</a>
+                      </div>
+                    </div>
+      						   {% endif %}
                 	{% endfor %}
 
 				    </div>
