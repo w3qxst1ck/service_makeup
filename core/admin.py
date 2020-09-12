@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from core.models import Category, Service
+from core.models import Category, Service, Record
 
 
 @admin.register(Category)
@@ -12,3 +12,6 @@ class CategoryAdmin(admin.ModelAdmin):
 class ServiceAdmin(admin.ModelAdmin):
     fileds = '__all__'
     prepopulated_fields = {'slug': ('title',)}
+
+
+admin.site.register(Record)

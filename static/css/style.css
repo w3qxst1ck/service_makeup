@@ -18,3 +18,10 @@ body {
 .services-list .card-header h2 {
 	font-size: 2.25rem;
 }
+
+
+/*Service detail*/
+
+.title-text {
+	font-size: 1.25rem;
+}

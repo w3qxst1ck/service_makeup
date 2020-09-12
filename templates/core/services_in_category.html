@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+{% block title %}Services | {{ category.title }}{% endblock %}
+
+{% block content %}
+<div class="container my-5 py-5 z-depth-1">
+
+
+  <!--Section: Content-->
+  <section class="text-center">
+
+    <!-- Section heading -->
+    <h1 class="mb-1 text-muted display-4 h1-responsive">{{ service.category.title }}</h1>
+    <hr class="mb-5">
+
+
+    <div class="row">
+      <div class="col-lg-6 ml-4">
+
+      	<img src="{{ service.image.url }}" class="img-fluid rounded z-depth-2 mb-4" alt="Responsive image">
+
+      </div>
+
+      <div class="col-lg-5 text-center text-md-left ml-4">
+
+        <h2 class="h2-responsive text-center text-md-left product-name font-weight-bold dark-grey-text mb-1 ml-xl-0 ml-4">
+          <strong>{{ service.title }}</strong>
+        </h2>
+        <span class="badge badge-warning mb-4 ml-xl-0 ml-4">{{ service.category.title }}</span>
+        <h3 class="h3-responsive text-center text-md-left mb-5 ml-xl-0 ml-4">
+        	Цена: 
+          <span class="blue-text font-weight-bold">
+            <strong>{{ service.price }} </strong>
+          </span>
+          <i class="fas fa-ruble-sign fa-sm blue-text"></i>
+        </h3>
+
+        <!--Accordion wrapper-->
+        <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="false">
+
+          <!-- Accordion card -->
+          <div class="card">
+
+            <!-- Card header -->
+            <div class="card-header" role="tab" id="headingOne1">
+              <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne" aria-expanded="true"
+                aria-controls="collapseOne">
+                <h5 class="mb-0">
+                  Описание
+                  <i class="fas fa-angle-down rotate-icon"></i>
+                </h5>
+              </a>
+            </div>
+
+            <!-- Card body -->
+            <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne1"
+              data-parent="#accordionEx">
+              <div class="card-body">
+                {{ service.description }}
+              </div>
+            </div>
+          </div>
+          <!-- Accordion card -->
+
+          <!-- Accordion card -->
+          <div class="card">
+
+            <!-- Card header -->
+            <div class="card-header" role="tab" id="headingTwo2">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseTwo2"
+                aria-expanded="false" aria-controls="collapseTwo2">
+                <h5 class="mb-0">
+                  Похожие услуги
+                  <i class="fas fa-angle-down rotate-icon"></i>
+                </h5>
+              </a>
+            </div>
+
+            <!-- Card body -->
+            <div id="collapseTwo2" class="collapse" role="tabpanel" aria-labelledby="headingTwo2"
+              data-parent="#accordionEx">
+              <div class="card-body">
+                {% for serv in category.service_set.all %}
+                	{% if serv.slug != service.slug %}
+                		<a href="{{ serv.get_absolute_url }}"><p class="text-muted"><i class="fas fa-angle-right ml-2"></i>  {{ serv.title }}</p></a>
+                	{% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <!-- Accordion card -->
+
+        </div>
+        <!--/.Accordion wrapper-->
+
+      </div>
+
+    </div>
+    <div class="row">
+    	<div class="col-md-10 mt-5 ml-4">
+    		<h2 class="h2-responsive text-muted text-left ml-2">Запись онлайн <i class="far fa-edit fa-xs"></i></h2>
+    		<hr>
+    	</div>
+
+	   <div class="col-md-12 col-lg-10 mb-5 ml-4">
+	   	{% if request.user.is_authenticated %}
+
+	   	{% for date in dates %}      
+        <!--Accordion wrapper-->
+        <div class="accordion md-accordion mb-3" id="accordionEy" role="tablist" aria-multiselectable="true">
+
+          <!-- Accordion card -->
+          <div class="card border-top border-bottom-0 border-left border-right border-light">
+
+            <!-- Card header -->
+            <div class="card-header border-bottom border-light" role="tab" id="headingOne2">
+              <a data-toggle="collapse" data-parent="#accordionEy" href="#collapseOn{{ forloop.counter }}" aria-expanded="true"
+                aria-controls="collapseOn{{ forloop.counter }}">
+                <h5 class="black-text text-left font-weight-normal mb-0 ml-2">
+                  {{ date|date:"d E Y года" }} <i class="far fa-calendar-alt"></i> <i class="fas fa-angle-down rotate-icon"></i>
+                </h5>
+              </a>
+            </div>
+
+            <!-- Card body -->
+            <div id="collapseOn{{ forloop.counter }}" class="collapse show" role="tabpanel" aria-labelledby="headingOne2"
+              data-parent="#accordionEy">
+              <div class="card-body">
+                <div class="mb-3 text-left">
+
+                	{% for time in times %}
+	                	<div class="btn-group" role="group">
+						    	<button data-year={{ date.year }} data-month={{ date.month }} data-day={{ date.day }} data-hour={{ time }} data-service={{ service.id }} type="button" class="btn btn-outline-primary btn-rounded waves-effect  add-record">{{ time }}:00</button>
+						   </div>
+                	{% endfor %}
+
+				    </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- Accordion card -->
+         
+        </div>
+        <!-- Accordion wrapper -->
+        {% endfor %}
+
+        {% else %}
+        <p class="red-text text-left">Для онлайн записи не обходимо авторизоваться.</p>
+        {% endif %}
+        
+      </div>
+
+ 	 </div>
+
+  </section>
+  <!--Section: Content-->
+
+
+</div>
+{% endblock %}

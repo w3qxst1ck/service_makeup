@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Services{% endblock %}
+{% block title %}Services | {{ category.title }}{% endblock %}
 
 {% block content %}
 	<div class="container-fluid">
@@ -8,13 +8,13 @@
 			<!-- Side bar -->
 			<div class="col-md-4 mt-2">
 				<div class="card border-primary mb-3 services-list" style="max-width: 20rem;">
-				  <div class="card-header"><h2 class="display-4">Услуги</h2></div>
+				  <div class="card-header"><h2 class="display-4 text-muted">Услуги</h2></div>
 				  <div class="card-body text-primary">
 
 				  	{% for c in categories %}
 				    <a href="{{ c.get_absolute_url }}"><h5 class="card-title">{{ c.title }}</h5></a>
 				    {% for serv in c.service_set.all %}
-					    <p class="card-text"><i class="fas fa-angle-right ml-2"></i>  <a href="" class="service-links">{{ serv.title }}</a></p>
+					    <p class="card-text"><i class="fas fa-angle-right ml-2"></i>  <a href="{{ serv.get_absolute_url }}" class="service-links">{{ serv.title }}</a></p>
 				    {% endfor %}
 				   {% endfor %}
 
@@ -25,6 +25,57 @@
 			<!-- Content -->
 			<div class="col-md-8 mt-2 pr-5">
 			
+			<!-- Category name -->
+			<div class="mb-4">
+				<h1 class="h1-responsive text-muted mb-4">{{ category.title }}</h1>
+				<hr>
+			</div>
+
+			<!-- Services in category -->
+			{% for serv in category.service_set.all %}
+			<div class="jumbotron text-center hoverable p-4 ">
+
+			  <!-- Grid row -->
+			  <div class="row">
+
+			    <!-- Grid column -->
+			    <div class="col-md-4 offset-md-1 mx-3 my-3">
+
+			      <!-- Featured image -->
+			      <div class="view overlay">
+			        <img src="{{ serv.image.url }}" class="img-fluid z-depth-1 rounded hoverable">
+			        <a href="{{ serv.get_absolute_url }}">
+			          <div class="mask rgba-white-slight"></div>
+			        </a>
+			      </div>
+
+			    </div>
+			    <!-- Grid column -->
+
+			    <!-- Grid column -->
+			    <div class="col-md-7 text-md-left ml-3 mt-3">
+
+			      <!-- Excerpt -->
+			      <a href="#!" class="blue-text">
+			        <h6 class="h6 pb-1"><a href="{{ serv.get_absolute_url }}"><i class="far fa-edit"></i> Запись онлайн</a></h6>
+			      </a>
+
+			      <h4 class="h4 mb-4">{{ serv.title }}</h4>
+
+			      <p class="font-weight-normal">{{ serv.description|truncatewords:40 }}</p>
+			      <p class="font-weight-normal"><a><strong>Цена</strong></a>: {{ serv.price }} р.</p>
+
+			      <a href="{{ serv.get_absolute_url }}" class="btn blue-gradient">Записаться</a>
+
+			    </div>
+			    <!-- Grid column -->
+
+			  </div>
+			  <!-- Grid row -->
+
+			</div>
+			{% endfor %}
+			<!-- News jumbotron -->
 			</div>
 		</div>
 	</div>

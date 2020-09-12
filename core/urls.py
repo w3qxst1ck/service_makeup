@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.urls import path
 
-from core.views import service_list, home, pricing
+from core.views import service_list, home, pricing, service, add_record
 
 urlpatterns = [
     path('', home, name='home'),
-    path('services/', pricing, name='pricing'),
-    path('services/<str:category_slug>/', service_list, name='services_with_category'),
+    path('pricing/', pricing, name='pricing'),
+    path('add_record/', add_record, name='add_record'),
+    path('services/<str:category_slug>/', service_list, name='services_list'),
+    path('services/<str:category_slug>/<int:id>/<str:slug>/', service, name='service_detail'),
 ]

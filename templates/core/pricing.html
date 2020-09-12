@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Services{% endblock %}
+{% block title %}Pricing{% endblock %}
 
 {% block content %}
 	<div class="container-fluid">
@@ -8,13 +8,13 @@
 			<!-- Side bar -->
 			<div class="col-md-4 mt-2">
 				<div class="card border-primary mb-3 services-list" style="max-width: 20rem;">
-				  <div class="card-header"><h2 class="display-4">Услуги</h2></div>
+				  <div class="card-header"><h2 class="display-4 text-muted">Услуги</h2></div>
 				  <div class="card-body text-primary">
 
 				  	{% for c in categories %}
 				    <a href="{{ c.get_absolute_url }}"><h5 class="card-title">{{ c.title }}</h5></a>
 				    {% for serv in c.service_set.all %}
-					    <p class="card-text"><i class="fas fa-angle-right ml-2"></i>  <a href="" class="service-links">{{ serv.title }}</a></p>
+					    <p class="card-text"><i class="fas fa-angle-right ml-2"></i>  <a href="{{ serv.get_absolute_url }}" class="service-links">{{ serv.title }}</a></p>
 				    {% endfor %}
 				   {% endfor %}
 
@@ -49,7 +49,7 @@
 					    <td>{{ serv.title }}</td>
 					    <td>{{ serv.price }}</td>
 					    <td>
-					      <button type="button" class="btn btn-indigo btn-sm m-0">Button</button>
+					      <a href="{{ serv.get_absolute_url }}"><button type="button" class="btn btn-indigo btn-sm m-0">Записаться</button></a>
 					    </td>
 					  </tr>
 					  {% endfor %}
