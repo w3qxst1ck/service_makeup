@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ request.user }} profile {% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<!-- Jumbotron -->
+				<div class="jumbotron text-center">
+
+				  <!-- Title -->
+				  <h2 class="card-title h2">{{ request.user}}, Добро пожаловать в профиль!</h2>
+				  <!-- Subtitle -->
+				  <h5 class="h5 orange-text my-4"><i class="fas fa-users"></i></i> Profile Makeup Service</h5>
+
+				  <!-- Grid row -->
+				  <div class="row d-flex justify-content-center">
+
+				    <!-- Grid column -->
+				    <div class="col-xl-7 pb-2">
+
+				      <p class="card-text">Здесь вы можете управлять своими записями на наши услуги.</p>
+
+				    </div>
+				    <!-- Grid column -->
+				  </div>
+				</div>
+				<!-- Jumbotron -->
+			</div>
+
+			<div class="col-md-12">
+				{% if active_records or prev_records %}
+				<h2 class="h2-responsive">Ваши записи: </h2>
+				<hr class="mb-5">
+				{% else %}
+				<h3 class="h3-responsive">У вас еще нет ни одной записи.</h2>
+				<hr class="mb-5">
+				{% endif %}
+
+				{% if active_records %}
+				<h3 class="h3-responsive mb-3">Действующие:</h3>
+				{% for record in active_records %}
+
+					<blockquote class="blockquote bq-primary" style="background-color: #dfeefd">
+					  <p class="bq-title">Услуга: <strong>"{{ record.service.title }}"</strong></p>
+					  <i class="far fa-edit"></i> Запись: на <strong>{{ record.date|date:"d E H:00" }}</strong> <i class="far fa-calendar-alt"></i>
+					  <p>При необходимости вы можете отменить запись.</p>
+
+					  	<div class="btn-group">
+						  <button class="btn btn-danger btn-sm dropdown-toggle" type="button" data-toggle="dropdown"
+						    aria-haspopup="true" aria-expanded="false">
+						    Отмена записи
+						  </button>
+						  <div class="dropdown-menu">
+						    <a class="dropdown-item" href="{% url 'delete_record' record.id %}">Отменить</a>
+						  </div>
+						</div>
+
+					</blockquote>
+				{% endfor %}
+				{% endif %}
+
+				<hr class="mt-2 mb-4">
+
+				{% if prev_records %}
+				<h3 class="h3-responsive mt-4 mb-3">Прошлые услуги:</h3>
+				{% for record in prev_records %}
+					<p class="note note-danger">Услуга: <strong>"{{ record.service.title }}"</strong>
+						<i class="far fa-edit"></i> Запись: на <strong>{{ record.date|date:"d E H:00" }}</strong> <i class="far fa-calendar-alt"></i>
+					</p>
+				{% endfor %}
+				{% endif %}
+			</div>
+
+		</div>
+	</div>
+{% endblock %}

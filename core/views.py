@@ -42,23 +42,6 @@ def service(request, category_slug, id, slug):
     date4 = dates[3]
     date5 = dates[4]
 
-    # times = ['0' + str(i) if len(str(i)) == 1 else str(i) for i in range(8, 18)]
-    # ordered_times = [str(record.date.time())[:2] for record in Record.objects.filter(service__slug=slug,
-    #                                                     date__gte=(now-datetime.timedelta(hours=now.hour)))]
-    # ordered = {}
-    # for rec in Record.objects.filter(service__slug=slug, date__gte=(now-datetime.timedelta(hours=now.hour))):
-    #     if rec.date.day not in ordered:
-    #         ordered[rec.date.day] = [str(rec.date.time())[:2]]
-    #     else:
-    #         ordered[rec.date.day].append(str(rec.date.time())[:2])
-    # print(ordered)
-
-    # week = []
-    # for day in range(now.day, now.day + 1):
-    #     for hour in range(8, 18):
-    #         if datetime.datetime(now.year, now.month, day, hour).weekday() not in [5, 6]:
-    #             week.append(datetime.datetime(now.year, now.month, day, hour, 0, 0, 0, UTC))
-    #
     ordered_dates = [rec.date for rec in Record.objects.filter(service__slug=slug,
                                                                 date__gte=(now-datetime.timedelta(hours=now.hour)))]
 
@@ -101,11 +84,25 @@ def add_record(request):
     if not Record.objects.filter(service=service_id, date=date):
         Record.objects.create(user=request.user, service=service, date=date)
 
-    # messages.info(request, "Вы были записаны на выбранную дату.")
     return JsonResponse('Record was added', safe=False)
 
 
+@login_required
+def profile(request):
+    now = datetime.datetime.now()
+    prev_records = Record.objects.filter(user=request.user,
+                                         date__lt=(now-datetime.timedelta(hours=now.hour))).order_by('-date')
+    active_records = Record.objects.filter(user=request.user,
+                                           date__gte=(now-datetime.timedelta(hours=now.hour))).order_by('-date')
+    now = now.replace(tzinfo=UTC)
+    context = {'prev_records': prev_records, 'active_records': active_records, 'now': now}
+    return render(request, 'core/profile.html', context)
 
 
-
+@login_required
+def delete_record(request, id):
+    record = Record.objects.get(id=id)
+    if request.user == record.user:
+        record.delete()
+    return redirect('profile')
 

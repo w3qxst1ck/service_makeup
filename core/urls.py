@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.urls import path
 
-from core.views import service_list, home, pricing, service, add_record
+from core.views import service_list, home, pricing, service, add_record, profile, delete_record
 
 urlpatterns = [
     path('', home, name='home'),
     path('pricing/', pricing, name='pricing'),
+    path('profile/', profile, name='profile'),
+    path('delete_record/<int:id>/', delete_record, name='delete_record'),
     path('add_record/', add_record, name='add_record'),
     path('services/<str:category_slug>/', service_list, name='services_list'),
     path('services/<str:category_slug>/<int:id>/<str:slug>/', service, name='service_detail'),
